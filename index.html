@@ -211,6 +211,14 @@
     border: 0;
   }
 
+  .shot {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+
   .feat-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -465,6 +473,67 @@
   </div>
 </section>
 
+<!-- ============ PROJECT 2 : UI 重构与批次优化 ============ -->
+<section id="uiproject">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="en">UI Performance</div>
+      <h2>商业 UI 重构实战（已脱敏）</h2>
+    </div>
+
+    <div class="proj-title">
+      <h3>复杂 UI 界面重构与渲染批次优化</h3>
+      <span class="tag">企业测试题</span>
+      <span class="tag">UGUI</span>
+      <span class="tag">性能优化</span>
+    </div>
+    <p class="proj-desc">
+      按商业项目规范重构一套包含 <strong>269 张切图、500+ 节点</strong>的复杂游戏 UI 界面：
+      从资源命名规范、编辑器自动化搭建，到 Sprite Atlas 图集与贴图压缩，
+      最终用 Frame Debugger 实测<strong>渲染批次从 130+ 降到 19</strong>。
+      因涉及企业测试内容，案例已脱敏，仅展示工程方法与实测数据。
+    </p>
+
+    <div class="stats" style="margin:0 0 40px; padding:0;">
+      <div class="stat"><div class="num">269</div><div class="label">张切图全英文规范化</div></div>
+      <div class="stat"><div class="num">529</div><div class="label">行规格表驱动批量搭建</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">张 Sprite Atlas 按模块划分</div></div>
+      <div class="stat"><div class="num">19</div><div class="label">渲染批次（原 130+）</div></div>
+    </div>
+
+    <img class="shot" src="assets/frame_debugger.png" alt="Frame Debugger 实测：整个界面 19 次 Draw Mesh">
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ico">Naming</div>
+        <h4>资源命名规范</h4>
+        <p>269 张切图统一改为全英文路径与命名，移动时同步迁移 .meta 文件，GUID 保持不变、场景引用零断裂。</p>
+      </div>
+      <div class="feat">
+        <div class="ico">Editor Pipeline</div>
+        <h4>编辑器自动化管线</h4>
+        <p>自写编辑器脚本：批量设置贴图导入参数（Sprite / PPU / 压缩格式），并按 PSD 导出的 529 行规格表一键搭建整个 UGUI 层级。</p>
+      </div>
+      <div class="feat">
+        <div class="ico">Atlas</div>
+        <h4>图集与贴图压缩</h4>
+        <p>按界面模块划分 4 张 Sprite Atlas，Standalone 平台覆盖 DXT5 压缩格式，兼顾渲染合批与包体体积。</p>
+      </div>
+      <div class="feat">
+        <div class="ico">Verification</div>
+        <h4>Frame Debugger 实测验证</h4>
+        <p>逐事件核对渲染流程，Canvas.RenderOverlays 下 Draw Mesh 从 130+ 收敛到 19，达成批次优化目标。</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <h4><span class="q">CASE 04</span>UI 渲染批次 130+ → 19</h4>
+      <p><strong>现象：</strong>界面切图零散、节点密集，Frame Debugger 中 Draw Mesh 超过 130 次。<strong>排查：</strong>切图未打图集，合批频繁被不同纹理打断。<strong>解决：</strong>按界面模块划分 4 张 Sprite Atlas，同模块 UI 引用同一图集，批次收敛到 19。</p>
+      <div class="flow">现象 → Frame Debugger 逐事件分析 → 模块图集划分 → 批次实测 ✓</div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ SKILLS ============ -->
 <section>
   <div class="wrap">
@@ -486,6 +555,7 @@
         <h4>Unity 引擎</h4>
         <div class="chips">
           <span class="chip">UGUI</span><span class="chip">Addressables</span>
+          <span class="chip">Sprite Atlas</span><span class="chip">Frame Debugger</span>
           <span class="chip">Cinemachine</span><span class="chip">Input System</span>
           <span class="chip">Animator</span><span class="chip">Tilemap</span>
           <span class="chip">Physics2D</span><span class="chip">DOTween</span>
